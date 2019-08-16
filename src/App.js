@@ -4,6 +4,26 @@ import Quiz from "./containers/Quiz/Quiz";
 
 
 class App extends Component {
+
+    // Иконка загрузки перед рендерингом
+    authenticate(){
+        return new Promise(resolve => setTimeout(resolve, 300))
+    }
+
+    componentDidMount(){
+        this.authenticate().then(() => {
+            const ele = document.getElementById('ipl-progress-indicator')
+            if(ele){
+                // fade out
+                ele.classList.add('available')
+                setTimeout(() => {
+                    // remove from DOM
+                    ele.outerHTML = ''
+                }, 300)
+            }
+        })
+    }
+
     render() {
         return (
               //Шаблон сайта
